@@ -4,25 +4,26 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.goodsoft.hotel.domain.dao.CookBookDao;
-import com.goodsoft.hotel.domain.entity.cookbook.Menu;
-import com.goodsoft.hotel.domain.entity.cookbook.MenuMeans;
-import com.goodsoft.hotel.domain.entity.cookbook.MenuSubType;
-import com.goodsoft.hotel.domain.entity.cookbook.MenuType;
+import com.goodsoft.hotel.domain.entity.cookbook.*;
 import com.goodsoft.hotel.domain.entity.param.PageParam;
 import com.goodsoft.hotel.domain.entity.result.Result;
 import com.goodsoft.hotel.domain.entity.result.Status;
 import com.goodsoft.hotel.domain.entity.result.StatusEnum;
 import com.goodsoft.hotel.service.CookBookService;
+import com.goodsoft.hotel.util.UUIDUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
  * description:
- * ===>
+ * ===>菜单管理业务接口实现类
  *
  * @author 严彬荣 Created on 2017-11-07 16:50
+ * @version V1.0
  */
 @SuppressWarnings("ALL")
 @Service
@@ -30,6 +31,8 @@ public class CookBookServicelmpl implements CookBookService {
 
     @Resource
     private CookBookDao dao;
+    //实例化UUID工具类
+    private UUIDUtil uuid = UUIDUtil.getInstance();
 
     /**
      * 菜单子类型数据过滤业务方法
@@ -103,8 +106,9 @@ public class CookBookServicelmpl implements CookBookService {
      */
     @Override
     public <T> T queryMenuService(String stid, PageParam page) throws Exception {
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         Page<Object> pages = PageHelper.startPage(page.getPage(), page.getTatol());
-        List<Menu> data = this.dao.queryMenuDao(stid);
+        List<Menu> data = this.dao.queryMenuDao(stid, date);
         if (data.size() > 0) {
             PageInfo<Menu> pageInfo = new PageInfo<>(data);
             Result result = new Result();
@@ -147,4 +151,54 @@ public class CookBookServicelmpl implements CookBookService {
         }
         return (T) new Status(StatusEnum.NO_DATA.getCODE(), StatusEnum.NO_DATA.getEXPLAIN());
     }
+
+    @Override
+    public void addMenuTypeDao(MenuType msg, List<MenuSubType> msg1) throws Exception {
+        String id = this.uuid.getUUID().toString();
+        msg.setId(id);
+        if (msg1 != null) {
+            int len = msg1.size();
+            for (int i = 0; i < len; ++i) {
+                msg1.get(i).setId(this.uuid.getUUID().toString());
+                msg1.get(i).setTid(id);
+            }
+            this.dao.addMenuSubtypeDao(msg1);
+        }
+        this.dao.addMenuTypeDao(msg);
+    }
+
+    @Override
+    public void addMenuDao(List<Menu> msg) throws Exception {
+        if (msg != null) {
+            int len = msg.size();
+            for (int i = 0; i < len; ++i) {
+                msg.get(i).setId(this.uuid.getUUID().toString());
+            }
+        }
+        this.dao.addMenuDao(msg);
+    }
+
+    @Override
+    public void addInventoryDao(List<Inventory> msg) throws Exception {
+        if (msg != null) {
+            int len = msg.size();
+            for (int i = 0; i < len; ++i) {
+                msg.get(i).setId(this.uuid.getUUID().toString());
+            }
+        }
+        this.dao.addInventoryDao(msg);
+    }
+
+    @Override
+    public void addMenuMeansDao(List<MenuMeans> msg) throws Exception {
+        if (msg != null) {
+            int len = msg.size();
+            for (int i = 0; i < len; ++i) {
+                msg.get(i).setId(this.uuid.getUUID().toString());
+            }
+        }
+        this.dao.addMenuMeansDao(msg);
+    }
+
+
 }

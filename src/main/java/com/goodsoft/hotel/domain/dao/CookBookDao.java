@@ -1,9 +1,6 @@
 package com.goodsoft.hotel.domain.dao;
 
-import com.goodsoft.hotel.domain.entity.cookbook.Menu;
-import com.goodsoft.hotel.domain.entity.cookbook.MenuMeans;
-import com.goodsoft.hotel.domain.entity.cookbook.MenuSubType;
-import com.goodsoft.hotel.domain.entity.cookbook.MenuType;
+import com.goodsoft.hotel.domain.entity.cookbook.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -29,8 +26,18 @@ public interface CookBookDao {
 
     List<MenuSubType> queryMenuSubtypeDao(@Param("tid") String tid) throws Exception;
 
-    List<Menu> queryMenuDao(@Param("stid") String stid) throws Exception;
+    List<Menu> queryMenuDao(@Param("stid") String stid, @Param("date") String date) throws Exception;
 
     List<MenuMeans> queryMenuMeansDao(@Param("cbid") String cbid) throws Exception;
+
+    void addMenuTypeDao(MenuType msg) throws Exception;
+
+    void addMenuSubtypeDao(List<MenuSubType> msg) throws Exception;
+
+    void addMenuDao(List<Menu> msg) throws Exception;
+
+    void addInventoryDao(List<Inventory> msg) throws Exception;
+
+    void addMenuMeansDao(List<MenuMeans> msg) throws Exception;
 
 }

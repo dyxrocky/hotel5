@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--@author 严彬荣，version v1.0-->
+<!--mapper 模板 start -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="com.goodsoft.hotel.domain.dao.CookBookDao">
+    <!--第三方缓存技术 ehcache-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+    <!--菜单类型添加-->
+    <insert id="addMenuTypeDao" parameterType="com.goodsoft.hotel.domain.entity.cookbook.MenuType">
+        INSERT INTO `gs_cookbook_type` (`ID`,`TNAME`) VALUES (#{ID},#{TNAME})
+    </insert>
+    <!--菜单子类型添加-->
+    <insert id="addMenuSubtypeDao" parameterType="list">
+        INSERT INTO `gs_cookbook_subtype`(`ID`,`STNAME`,`TID`) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.ID},#{item.STNAME},#{item.TID})
+        </foreach>
+    </insert>
+    <!--菜单添加-->
+    <insert id="addMenuDao" parameterType="list">
+        INSERT INTO `gs_cookbook` (`ID`,`TID`,`STID`,`CBNAME`,`CBPRICE`) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.ID},#{item.TID},#{item.STID},#{item.CBNAME},#{item.CBPRICE})
+        </foreach>
+    </insert>
+    <!--菜单库存量添加-->
+    <insert id="addInventoryDao" parameterType="list">
+        INSERT INTO `gs_cookbook_inventory` (`ID`,`KC_DATE`,`KC_NUM`,`CBID`) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.ID},#{item.KC_DATE},#{item.KC_NUM},#{item.CBID})
+        </foreach>
+    </insert>
+    <!--菜单做法添加-->
+    <insert id="addMenuMeansDao" parameterType="list">
+        INSERT INTO .`gs_cookbook_means` (`ID`,`MNAME`,`CBID`) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.ID},#{item.MNAME},#{item.CBID})
+        </foreach>
+    </insert>
+</mapper>
+        <!--mapper 模板 end -->

@@ -56,7 +56,7 @@ public class Menu implements java.io.Serializable {
     }
 
     public void setCbName(String cbName) {
-        this.cbName = cbName;
+        this.cbName = cbName == null ? " " : cbName.trim();
     }
 
     public double getPrice() {

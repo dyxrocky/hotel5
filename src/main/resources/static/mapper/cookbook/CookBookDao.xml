@@ -4,6 +4,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--suppress ALL -->
 <mapper namespace="com.goodsoft.hotel.domain.dao.CookBookDao">
+    <!--第三方缓存技术 ehcache-->
+    <cache-ref namespace="com.goodsoft.hotel.domain.dao.CookBookDao"/>
     <!--菜单子类型数据过滤-->
     <resultMap id="MenuSubtypeInfo" type="com.goodsoft.hotel.domain.entity.cookbook.MenuSubType">
         <result property="id" column="ID"/>
@@ -51,13 +53,14 @@
         <result column="STID" property="stid"/>
         <result column="CBNAME" property="cbName"/>
         <result column="CBPRICE" property="price"/>
-        <result column="INVENTORY" property="num"/>
+        <result column="KC_NUM" property="num"/>
     </resultMap>
     <select id="queryMenuDao" parameterType="string" resultMap="menuInfo">
-        SELECT `ID`,`CBID`,`TID`,`STID`,`CBNAME`,`CBPRICE`,`INVENTORY` FROM `gs_cookbook`
+        SELECT a.*,b.KC_DATE,b.KC_NUM FROM `gs_cookbook` a left join gs_cookbook_inventory b on a.ID=b.CBID
         <where>
+            b.KC_DATE=#{date}
             <if test="stid != null and stid !=''">
-                STID=#{stid}
+                AND a.STID=#{stid}
             </if>
         </where>
     </select>

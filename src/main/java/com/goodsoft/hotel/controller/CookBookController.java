@@ -1,15 +1,17 @@
 package com.goodsoft.hotel.controller;
 
+import com.goodsoft.hotel.domain.entity.cookbook.Inventory;
+import com.goodsoft.hotel.domain.entity.cookbook.Menu;
+import com.goodsoft.hotel.domain.entity.cookbook.MenuMeans;
+import com.goodsoft.hotel.domain.entity.cookbook.MenuSubType;
 import com.goodsoft.hotel.domain.entity.param.PageParam;
 import com.goodsoft.hotel.domain.entity.result.Status;
 import com.goodsoft.hotel.domain.entity.result.StatusEnum;
 import com.goodsoft.hotel.service.CookBookService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * description:
@@ -116,4 +118,53 @@ public class CookBookController {
 
     }
 
+    @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.POST)
+    @RequestMapping(value = "/add/mean/type/data.shtml", method = RequestMethod.POST)
+    public Status addMenuTypeDao(@RequestBody List<MenuSubType> msg1) {
+        try {
+            /*this.service.addMenuTypeDao(msg, null);*/
+            msg1.remove(msg1.size() - 1);
+            for (MenuSubType msg : msg1) {
+                System.out.println("类型名称：" + msg.gettName());
+                System.out.println("子类型名称：" + msg.getStName());
+            }
+            return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Status(StatusEnum.DEFEAT.getCODE(), StatusEnum.DEFEAT.getEXPLAIN());
+        }
+    }
+
+    @RequestMapping(value = "/query/mean/data.shtml", method = RequestMethod.POST)
+    public Status addMenuDao(List<Menu> msg) {
+        try {
+            this.service.addMenuDao(msg);
+            return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Status(StatusEnum.DEFEAT.getCODE(), StatusEnum.DEFEAT.getEXPLAIN());
+        }
+    }
+
+    @RequestMapping(value = "/add/mean/inventory/data.shtml", method = RequestMethod.POST)
+    public Status addInventoryDao(List<Inventory> msg) {
+        try {
+            this.service.addInventoryDao(msg);
+            return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Status(StatusEnum.DEFEAT.getCODE(), StatusEnum.DEFEAT.getEXPLAIN());
+        }
+    }
+
+    @RequestMapping(value = "/add/mean/means/data.shtml", method = RequestMethod.POST)
+    public Status addMenuMeansDao(List<MenuMeans> msg) {
+        try {
+            this.service.addMenuMeansDao(msg);
+            return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Status(StatusEnum.DEFEAT.getCODE(), StatusEnum.DEFEAT.getEXPLAIN());
+        }
+    }
 }
