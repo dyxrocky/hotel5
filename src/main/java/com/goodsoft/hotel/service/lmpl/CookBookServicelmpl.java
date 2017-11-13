@@ -153,11 +153,14 @@ public class CookBookServicelmpl implements CookBookService {
     }
 
     @Override
-    public void addMenuTypeDao(MenuType msg, List<MenuSubType> msg1) throws Exception {
+    public void addMenuTypeService(List<MenuSubType> msg1) throws Exception {
         String id = this.uuid.getUUID().toString();
+        MenuType msg = new MenuType();
         msg.setId(id);
+        msg.settName(msg1.get(0).gettName());
         if (msg1 != null) {
-            int len = msg1.size();
+            int len = msg1.size() - 1;
+            msg1.remove(len);
             for (int i = 0; i < len; ++i) {
                 msg1.get(i).setId(this.uuid.getUUID().toString());
                 msg1.get(i).setTid(id);
@@ -168,33 +171,51 @@ public class CookBookServicelmpl implements CookBookService {
     }
 
     @Override
-    public void addMenuDao(List<Menu> msg) throws Exception {
+    public void addMenuService(List<Menu> msg) throws Exception {
         if (msg != null) {
-            int len = msg.size();
-            for (int i = 0; i < len; ++i) {
+            int len = msg.size() - 1;
+            msg.remove(len);
+            String tid = msg.get(0).getTid();
+            String stid = msg.get(0).getStid();
+            msg.get(0).setId(this.uuid.getUUID().toString());
+            Inventory inv = new Inventory();
+            inv.setNum(msg.get(0).getNum());
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            for (int i = 1; i < len; ++i) {
                 msg.get(i).setId(this.uuid.getUUID().toString());
+                msg.get(i).setTid(tid);
+                msg.get(i).setStid(stid);
+                inv.setNum(msg.get(i).getNum());
+                inv.setDate(date);
             }
         }
         this.dao.addMenuDao(msg);
     }
 
     @Override
-    public void addInventoryDao(List<Inventory> msg) throws Exception {
+    public void addInventoryService(List<Inventory> msg) throws Exception {
         if (msg != null) {
-            int len = msg.size();
-            for (int i = 0; i < len; ++i) {
+            int len = msg.size() - 1;
+            msg.remove(len);
+            String cbid = msg.get(0).getCbid();
+            msg.get(0).setId(this.uuid.getUUID().toString());
+            for (int i = 1; i < len; ++i) {
                 msg.get(i).setId(this.uuid.getUUID().toString());
+                msg.get(i).setCbid(cbid);
             }
         }
         this.dao.addInventoryDao(msg);
     }
 
     @Override
-    public void addMenuMeansDao(List<MenuMeans> msg) throws Exception {
+    public void addMenuMeansService(List<MenuMeans> msg) throws Exception {
         if (msg != null) {
-            int len = msg.size();
-            for (int i = 0; i < len; ++i) {
+            int len = msg.size() - 1;
+            msg.remove(len);
+            String cbid = msg.get(0).getCbid();
+            for (int i = 1; i < len; ++i) {
                 msg.get(i).setId(this.uuid.getUUID().toString());
+                msg.get(i).setCbid(cbid);
             }
         }
         this.dao.addMenuMeansDao(msg);

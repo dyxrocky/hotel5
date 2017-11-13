@@ -24,7 +24,7 @@ public class Menu implements java.io.Serializable {
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = id == null ? " " : id.trim();
     }
 
     public int getCbid() {
@@ -40,7 +40,7 @@ public class Menu implements java.io.Serializable {
     }
 
     public void setTid(String tid) {
-        this.tid = tid;
+        this.tid = tid == null ? " " : tid.trim();
     }
 
     public String getStid() {
@@ -48,7 +48,7 @@ public class Menu implements java.io.Serializable {
     }
 
     public void setStid(String stid) {
-        this.stid = stid;
+        this.stid = stid == null ? " " : stid.trim();
     }
 
     public String getCbName() {

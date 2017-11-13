@@ -8,34 +8,34 @@
     <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
     <!--菜单类型添加-->
     <insert id="addMenuTypeDao" parameterType="com.goodsoft.hotel.domain.entity.cookbook.MenuType">
-        INSERT INTO `gs_cookbook_type` (`ID`,`TNAME`) VALUES (#{ID},#{TNAME})
+        INSERT INTO `gs_cookbook_type` (`ID`,`TNAME`) VALUES (#{id},#{tName})
     </insert>
     <!--菜单子类型添加-->
     <insert id="addMenuSubtypeDao" parameterType="list">
         INSERT INTO `gs_cookbook_subtype`(`ID`,`STNAME`,`TID`) VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.ID},#{item.STNAME},#{item.TID})
+            (#{item.id},#{item.stName},#{item.tid})
         </foreach>
     </insert>
     <!--菜单添加-->
     <insert id="addMenuDao" parameterType="list">
         INSERT INTO `gs_cookbook` (`ID`,`TID`,`STID`,`CBNAME`,`CBPRICE`) VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.ID},#{item.TID},#{item.STID},#{item.CBNAME},#{item.CBPRICE})
+            (#{item.id},#{item.tid},#{item.stid},#{item.cbName},#{item.price})
         </foreach>
     </insert>
     <!--菜单库存量添加-->
     <insert id="addInventoryDao" parameterType="list">
         INSERT INTO `gs_cookbook_inventory` (`ID`,`KC_DATE`,`KC_NUM`,`CBID`) VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.ID},#{item.KC_DATE},#{item.KC_NUM},#{item.CBID})
+            (#{item.id},#{item.date},#{item.num},#{item.cbid})
         </foreach>
     </insert>
     <!--菜单做法添加-->
     <insert id="addMenuMeansDao" parameterType="list">
         INSERT INTO .`gs_cookbook_means` (`ID`,`MNAME`,`CBID`) VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.ID},#{item.MNAME},#{item.CBID})
+            (#{item.id},#{item.mName},#{item.cbid})
         </foreach>
     </insert>
 </mapper>

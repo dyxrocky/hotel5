@@ -1,6 +1,9 @@
 package com.goodsoft.hotel.service;
 
-import com.goodsoft.hotel.domain.entity.cookbook.*;
+import com.goodsoft.hotel.domain.entity.cookbook.Inventory;
+import com.goodsoft.hotel.domain.entity.cookbook.Menu;
+import com.goodsoft.hotel.domain.entity.cookbook.MenuMeans;
+import com.goodsoft.hotel.domain.entity.cookbook.MenuSubType;
 import com.goodsoft.hotel.domain.entity.param.PageParam;
 
 import java.util.List;
@@ -23,12 +26,12 @@ public interface CookBookService {
 
     <T> T queryMenuMeansService(String cbid, PageParam page) throws Exception;
 
-    void addMenuTypeDao(MenuType msg, List<MenuSubType> msg1) throws Exception;
+    void addMenuTypeService(List<MenuSubType> msg1) throws Exception;
 
-    void addMenuDao(List<Menu> msg) throws Exception;
+    void addMenuService(List<Menu> msg) throws Exception;
 
-    void addInventoryDao(List<Inventory> msg) throws Exception;
+    void addInventoryService(List<Inventory> msg) throws Exception;
 
-    void addMenuMeansDao(List<MenuMeans> msg) throws Exception;
+    void addMenuMeansService(List<MenuMeans> msg) throws Exception;
 
 }
