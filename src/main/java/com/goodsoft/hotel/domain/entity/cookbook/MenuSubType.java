@@ -38,7 +38,7 @@ public class MenuSubType implements java.io.Serializable {
     }
 
     public void settName(String tName) {
-        this.tName = tName == null ? " " : tName.trim();
+        this.tName = tName == null ? null : tName.trim();
     }
 
     public String getStName() {
@@ -46,7 +46,7 @@ public class MenuSubType implements java.io.Serializable {
     }
 
     public void setStName(String stName) {
-        this.stName = stName == null ? " " : stName.trim();
+        this.stName = stName == null ? null : stName.trim();
     }
 
     public String getTid() {

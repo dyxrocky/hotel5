@@ -1,9 +1,9 @@
 package com.goodsoft.hotel.controller;
 
-import com.goodsoft.hotel.domain.entity.cookbook.Inventory;
 import com.goodsoft.hotel.domain.entity.cookbook.Menu;
 import com.goodsoft.hotel.domain.entity.cookbook.MenuMeans;
 import com.goodsoft.hotel.domain.entity.cookbook.MenuSubType;
+import com.goodsoft.hotel.domain.entity.cookbook.SetMealDetail;
 import com.goodsoft.hotel.domain.entity.param.PageParam;
 import com.goodsoft.hotel.domain.entity.result.Status;
 import com.goodsoft.hotel.domain.entity.result.StatusEnum;
@@ -143,10 +143,10 @@ public class CookBookController {
     }
 
     @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.POST)
-    @RequestMapping(value = "/add/mean/inventory/data.shtml", method = RequestMethod.POST)
-    public Status addInventoryService(@RequestBody List<Inventory> msg) {
+    @RequestMapping(value = "/add/mean/means/data.shtml", method = RequestMethod.POST)
+    public Status addMenuMeansService(@RequestBody List<MenuMeans> msg) {
         try {
-            this.service.addInventoryService(msg);
+            this.service.addMenuMeansService(msg);
             return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
         } catch (Exception e) {
             e.printStackTrace();
@@ -155,10 +155,10 @@ public class CookBookController {
     }
 
     @CrossOrigin(origins = "*", maxAge = 3600, methods = RequestMethod.POST)
-    @RequestMapping(value = "/add/mean/means/data.shtml", method = RequestMethod.POST)
-    public Status addMenuMeansService(@RequestBody List<MenuMeans> msg) {
+    @RequestMapping(value = "/add/mean/set/meal/data.shtml", method = RequestMethod.POST)
+    public Status addSetMealService(@RequestBody List<SetMealDetail> msg) {
         try {
-            this.service.addMenuMeansService(msg);
+            this.service.addSetMealService(msg);
             return new Status(StatusEnum.SUCCESS.getCODE(), StatusEnum.SUCCESS.getEXPLAIN());
         } catch (Exception e) {
             e.printStackTrace();

@@ -36,7 +36,7 @@ public class MenuType implements java.io.Serializable {
     }
 
     public void settName(String tName) {
-        this.tName = tName == null ? " " : tName.trim();
+        this.tName = tName == null ? null : tName.trim();
     }
 
     @Override

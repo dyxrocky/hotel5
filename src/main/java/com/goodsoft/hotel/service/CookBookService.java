@@ -1,9 +1,9 @@
 package com.goodsoft.hotel.service;
 
-import com.goodsoft.hotel.domain.entity.cookbook.Inventory;
 import com.goodsoft.hotel.domain.entity.cookbook.Menu;
 import com.goodsoft.hotel.domain.entity.cookbook.MenuMeans;
 import com.goodsoft.hotel.domain.entity.cookbook.MenuSubType;
+import com.goodsoft.hotel.domain.entity.cookbook.SetMealDetail;
 import com.goodsoft.hotel.domain.entity.param.PageParam;
 
 import java.util.List;
@@ -30,8 +30,8 @@ public interface CookBookService {
 
     void addMenuService(List<Menu> msg) throws Exception;
 
-    void addInventoryService(List<Inventory> msg) throws Exception;
-
     void addMenuMeansService(List<MenuMeans> msg) throws Exception;
+
+    void addSetMealService(List<SetMealDetail> msg) throws Exception;
 
 }

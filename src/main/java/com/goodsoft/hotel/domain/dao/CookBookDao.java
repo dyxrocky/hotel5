@@ -40,4 +40,8 @@ public interface CookBookDao {
 
     void addMenuMeansDao(List<MenuMeans> msg) throws Exception;
 
+    void addSetMealDao(SetMeal msg) throws Exception;
+
+    void addSetMealDetailDao(List<SetMealDetail> msg) throws Exception;
+
 }

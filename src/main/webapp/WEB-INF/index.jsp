@@ -14,5 +14,7 @@
 <body>
 <h1>欢迎使用</h1>
 ${test }
+<c:set var="item" value="hello">
+</c:set>
 </body>
 </html>

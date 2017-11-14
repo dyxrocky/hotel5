@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -154,11 +155,11 @@ public class CookBookServicelmpl implements CookBookService {
 
     @Override
     public void addMenuTypeService(List<MenuSubType> msg1) throws Exception {
-        String id = this.uuid.getUUID().toString();
-        MenuType msg = new MenuType();
-        msg.setId(id);
-        msg.settName(msg1.get(0).gettName());
         if (msg1 != null) {
+            String id = this.uuid.getUUID().toString();
+            MenuType msg = new MenuType();
+            msg.setId(id);
+            msg.settName(msg1.get(0).gettName());
             int len = msg1.size() - 1;
             msg1.remove(len);
             for (int i = 0; i < len; ++i) {
@@ -166,8 +167,8 @@ public class CookBookServicelmpl implements CookBookService {
                 msg1.get(i).setTid(id);
             }
             this.dao.addMenuSubtypeDao(msg1);
+            this.dao.addMenuTypeDao(msg);
         }
-        this.dao.addMenuTypeDao(msg);
     }
 
     @Override
@@ -177,34 +178,23 @@ public class CookBookServicelmpl implements CookBookService {
             msg.remove(len);
             String tid = msg.get(0).getTid();
             String stid = msg.get(0).getStid();
-            msg.get(0).setId(this.uuid.getUUID().toString());
-            Inventory inv = new Inventory();
-            inv.setNum(msg.get(0).getNum());
             String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-            for (int i = 1; i < len; ++i) {
-                msg.get(i).setId(this.uuid.getUUID().toString());
+            List<Inventory> msg1 = new ArrayList<Inventory>();
+            for (int i = 0; i < len; ++i) {
+                Inventory inv = new Inventory();
+                String id = this.uuid.getUUID().toString();
+                msg.get(i).setId(id);
                 msg.get(i).setTid(tid);
                 msg.get(i).setStid(stid);
+                inv.setId(this.uuid.getUUID().toString());
                 inv.setNum(msg.get(i).getNum());
                 inv.setDate(date);
+                inv.setCbid(id);
+                msg1.add(inv);
             }
+            this.dao.addInventoryDao(msg1);
         }
         this.dao.addMenuDao(msg);
-    }
-
-    @Override
-    public void addInventoryService(List<Inventory> msg) throws Exception {
-        if (msg != null) {
-            int len = msg.size() - 1;
-            msg.remove(len);
-            String cbid = msg.get(0).getCbid();
-            msg.get(0).setId(this.uuid.getUUID().toString());
-            for (int i = 1; i < len; ++i) {
-                msg.get(i).setId(this.uuid.getUUID().toString());
-                msg.get(i).setCbid(cbid);
-            }
-        }
-        this.dao.addInventoryDao(msg);
     }
 
     @Override
@@ -213,6 +203,7 @@ public class CookBookServicelmpl implements CookBookService {
             int len = msg.size() - 1;
             msg.remove(len);
             String cbid = msg.get(0).getCbid();
+            msg.get(0).setId(this.uuid.getUUID().toString());
             for (int i = 1; i < len; ++i) {
                 msg.get(i).setId(this.uuid.getUUID().toString());
                 msg.get(i).setCbid(cbid);
@@ -221,5 +212,21 @@ public class CookBookServicelmpl implements CookBookService {
         this.dao.addMenuMeansDao(msg);
     }
 
-
+    @Override
+    public void addSetMealService(List<SetMealDetail> msg) throws Exception {
+        if (msg != null) {
+            String id = this.uuid.getUUID().toString();
+            SetMeal meal = new SetMeal();
+            meal.setId(id);
+            int len = msg.size() - 1;
+            msg.remove(len);
+            meal.setSmName(msg.get(0).getSmName());
+            for (int i = 0; i < len; ++i) {
+                msg.get(i).setId(this.uuid.getUUID().toString());
+                msg.get(i).setSmid(id);
+            }
+            this.dao.addSetMealDetailDao(msg);
+            this.dao.addSetMealDao(meal);
+        }
+    }
 }
