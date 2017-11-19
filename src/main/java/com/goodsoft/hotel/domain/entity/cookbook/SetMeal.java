@@ -14,6 +14,9 @@ public class SetMeal implements java.io.Serializable {
     private String id;
     private String smName;
     private int smid;
+    private int isdd;
+    private int isNo;
+    private double stPrice;
 
     public String getId() {
         return id;
@@ -39,18 +42,41 @@ public class SetMeal implements java.io.Serializable {
         this.smid = smid;
     }
 
+    public int getIsdd() {
+        return isdd;
+    }
+
+    public void setIsdd(int isdd) {
+        this.isdd = isdd;
+    }
+
+    public int getIsNo() {
+        return isNo;
+    }
+
+    public void setIsNo(int isNo) {
+        this.isNo = isNo;
+    }
+
+    public double getStPrice() {
+        return stPrice;
+    }
+
+    public void setStPrice(double stPrice) {
+        this.stPrice = stPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SetMeal)) return false;
         SetMeal setMeal = (SetMeal) o;
-        return smid == setMeal.smid &&
-                Objects.equals(id, setMeal.id) &&
+        return Objects.equals(id, setMeal.id) &&
                 Objects.equals(smName, setMeal.smName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, smName, smid);
+        return Objects.hash(id, smName);
     }
 }

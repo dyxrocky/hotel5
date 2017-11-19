@@ -15,6 +15,9 @@ public class SetMealDetail implements java.io.Serializable {
     private String cbid;
     private String smid;
     private String smName;
+    private int isdd;
+    private int isNo;
+    private double stPrice;
 
     public String getId() {
         return id;
@@ -46,6 +49,30 @@ public class SetMealDetail implements java.io.Serializable {
 
     public void setSmName(String smName) {
         this.smName = smName == null ? null : smName.trim();
+    }
+
+    public int getIsdd() {
+        return isdd;
+    }
+
+    public void setIsdd(int isdd) {
+        this.isdd = isdd;
+    }
+
+    public int getIsNo() {
+        return isNo;
+    }
+
+    public void setIsNo(int isNo) {
+        this.isNo = isNo;
+    }
+
+    public double getStPrice() {
+        return stPrice;
+    }
+
+    public void setStPrice(double stPrice) {
+        this.stPrice = stPrice;
     }
 
     @Override

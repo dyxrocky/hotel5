@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--@author 严彬荣，version v1.0-->
-<!--mapper 模板 start -->
+<!--mapper 菜单管理数据录入 start -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--suppress ALL -->
 <mapper namespace="com.goodsoft.hotel.domain.dao.CookBookDao">
@@ -19,9 +19,13 @@
     </insert>
     <!--菜单添加-->
     <insert id="addMenuDao" parameterType="list">
-        INSERT INTO `gs_cookbook` (`ID`,`TID`,`STID`,`CBNAME`,`CBPRICE`) VALUES
+        INSERT INTO `gudou_1`.`gs_cookbook`
+        (`ID`,`TID`,`STID`,`CBNAME`,`UNIT`,`IS_DISCOUNT`,`spec1`,`spec2`,`spec3`,
+        `spec4`,`spec5`,`PRICE1`,`PRICE2`,`PRICE3`,`PRICE4`,`PRICE5`)
+        VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.id},#{item.tid},#{item.stid},#{item.cbName},#{item.price})
+            (#{item.id},#{item.tid},#{item.stid},#{item.cbName},#{item.unit},#{item.isNo},#{item.spec1},#{item.spec2},#{item.spec3},
+            #{item.spec4},#{item.spec5},#{item.price1},#{item.price2},#{item.price3},#{item.price4},#{item.price5})
         </foreach>
     </insert>
     <!--菜单库存量添加-->
@@ -38,9 +42,16 @@
             (#{item.id},#{item.mName},#{item.cbid})
         </foreach>
     </insert>
+    <!--菜单做法详情添加-->
+    <insert id="addMenuMeansDetailDao" parameterType="list">
+        INSERT INTO `gs_cookbook_means_detal` (`ID`,`MID`,`MDNAME`) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.mid},#{item.mdName})
+        </foreach>
+    </insert>
     <!--套餐数据添加-->
     <insert id="addSetMealDao" parameterType="com.goodsoft.hotel.domain.entity.cookbook.SetMeal">
-    INSERT INTO `gs_cookbook_setmeal`(`ID`,`SMNAME`) VALUES (#{id},#{smName})
+    INSERT INTO `gs_cookbook_setmeal`(`ID`,`SMNAME`,`TC_PRICE`,`SM_ID_DISCOUNT`,`IS_DD`) VALUES (#{id},#{smName},#{stPrice},#{isNo},#{isdd})
     </insert>
     <!--套餐内容数据添加-->
     <insert id="addSetMealDetailDao" parameterType="list">
@@ -50,4 +61,4 @@
         </foreach>
     </insert>
 </mapper>
-        <!--mapper 模板 end -->
+        <!--mapper 菜单管理数据录入 end -->

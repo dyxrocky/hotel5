@@ -1,9 +1,5 @@
 package com.goodsoft.hotel.config.timer;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -14,11 +10,11 @@ import java.util.Date;
  * @author 严彬荣 Created on 2017-11-12 10:58
  * @version v1.0
  */
-@Configuration
-@EnableScheduling
+/*@Configuration
+@EnableScheduling*/
 public class Timer {
     //每天凌晨1点执行一次
-    @Scheduled(cron = "0 59 23 * * ?")
+    /*@Scheduled(cron = "0 59 23 * * ?")*/
     public void timer() {
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         System.out.println("执行时间为：" + date);
