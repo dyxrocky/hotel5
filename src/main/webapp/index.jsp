@@ -8,10 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>hello</title>
+    <title>Title</title>
 </head>
 <body>
-ww
-jhgbk
+
 </body>
 </html>
